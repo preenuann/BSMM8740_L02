@@ -1,0 +1,71 @@
+---
+title: "BSMM-lab-2"
+subtitle: "BSMM 8740 Fall 2023"
+author: "Add your name here"
+date: "Add the date here"
+format: html
+editor: visual
+self-contained: true
+---
+
+## Setup
+
+Load packages and data:
+
+```{r load-pkg-data}
+#| message: false
+the_tate <- readr::read_delim("data/the-tate-collection.csv", ";", escape_double = FALSE, trim_ws = TRUE)
+the_tate_artists <- readr::read_csv("data/the-tate-artists.csv")
+```
+
+## Exercises
+
+### Exercise 1
+
+The `the_tate` dataset has \_\_\_ unique artists who worked from \_\_\_ to \_\_\_. The works were acquired between the years \_\_\_ and \_\_\_.
+
+### Exercise 2
+
+How number of works with missing dates is \_\_.
+
+The number of artists whose works have missing dates is \_\_.
+
+It would require resolving missing year data for only \_\_ artists resolve resolve at least 50% of the missing data.
+
+The missing year data likely to be classified as \_\_\_\_.
+
+### Exercise 3
+
+The artist with the most works in the Tate collection is \_\_\_.
+
+The artist with the tenth-most works in the Tate collection is \_\_\_.
+
+### Exercise 4
+
+The artist with the greatest number of works in the Tate collection represent \_\_\_% of the total number of works
+
+### Exercise 5
+
+There are \_\_ duplicate artist-title pairs
+
+### Exercise 6
+
+The artist with the largest work in the tate collection is \_\_\_
+
+The artist with the smallest work in the collection is \_\_\_. The smallest work has area \_\_\_ $\text{cm}^2$
+
+### Exercise 7
+
+...
+
+### Exercise 8
+
+The annual return in the SPX price in 2020 was \_\_\_%.
+
+The corresponding price volatility was \_\_\_%.
+
+### Exercise 9
+
+The period volatility was \_\_\_.\_%
+
+### 
