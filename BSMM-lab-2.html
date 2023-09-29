@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Anna Preenu Pappachan Rosily">
+<meta name="author" content="Anna Preenu Pappachan Rosily - 110105133">
 <meta name="dcterms.date" content="2023-09-29">
 
 <title>BSMM-lab-2</title>
@@ -2630,7 +2630,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Anna Preenu Pappachan Rosily </p>
+             <p>Anna Preenu Pappachan Rosily - 110105133 </p>
           </div>
   </div>
     
@@ -2735,7 +2735,7 @@ vertical-align: -.125em;
 ✖ purrr::set_names() masks magrittr::set_names()
 ✖ yardstick::spec()  masks readr::spec()
 ✖ recipes::step()    masks stats::step()
-• Use suppressPackageStartupMessages() to eliminate package startup messages</code></pre>
+• Use tidymodels_prefer() to resolve common conflicts.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)           <span class="co"># for making display tables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -2745,7 +2745,7 @@ vertical-align: -.125em;
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package &#39;gtExtras&#39; was built under R version 4.3.1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DataExplorer) <span class="co">#</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DataExplorer) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package &#39;DataExplorer&#39; was built under R version 4.3.1</code></pre>
 </div>
@@ -2831,15 +2831,17 @@ $ thumbnailCopyright &lt;chr&gt; &quot;© Alan Charlton&quot;, &quot;© ARS, NY 
 $ thumbnailUrl       &lt;chr&gt; &quot;https://data.opendatasoft.com/api/datasets/1.0/the…
 $ url                &lt;chr&gt; &quot;http://www.tate.org.uk/art/artworks/charlton-no-ti…</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>missing_recs <span class="ot">&lt;-</span> the_tate <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="fu">is.na</span>(year))</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>missing_recs_len <span class="ot">&lt;-</span> <span class="fu">nrow</span>(missing_recs)</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>missing_recs_len</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finding works with missing year data</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>missing_recs <span class="ot">&lt;-</span> the_tate <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="fu">is.na</span>(year))</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>missing_recs_len <span class="ot">&lt;-</span> <span class="fu">nrow</span>(missing_recs)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>missing_recs_len</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5397</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#5397 rows have missing data</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>the_tate<span class="sc">|&gt;</span>dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="fu">is.na</span>(year))<span class="sc">|&gt;</span>dplyr<span class="sc">::</span><span class="fu">distinct</span>(artist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Finding number of artists with missing date</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>the_tate<span class="sc">|&gt;</span>dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="fu">is.na</span>(year))<span class="sc">|&gt;</span>dplyr<span class="sc">::</span><span class="fu">distinct</span>(artist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 461 × 1
    artist                           
@@ -2864,12 +2866,13 @@ $ url                &lt;chr&gt; &quot;http://www.tate.org.uk/art/artworks/charl
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 461</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>artist_missing_year_count <span class="ot">&lt;-</span> the_tate<span class="sc">|&gt;</span>dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="fu">is.na</span>(year)) <span class="sc">|&gt;</span> </span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(artist) <span class="sc">|&gt;</span></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">missing_year =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(year))) <span class="sc">|&gt;</span> </span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(missing_year)) <span class="sc">|&gt;</span> <span class="co">#Arrange the results in descending order of missing &#39;year&#39; counts#</span></span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(artist_missing_year_count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Another way to find the number of works with missing year</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>artist_missing_year_count <span class="ot">&lt;-</span> the_tate<span class="sc">|&gt;</span>dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="fu">is.na</span>(year)) <span class="sc">|&gt;</span> </span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(artist) <span class="sc">|&gt;</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">missing_year =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(year))) <span class="sc">|&gt;</span> </span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(missing_year)) <span class="sc">|&gt;</span> </span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(artist_missing_year_count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 461 × 2
    artist                         missing_year
@@ -2896,14 +2899,15 @@ $ url                &lt;chr&gt; &quot;http://www.tate.org.uk/art/artworks/charl
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5397</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>artist_missing_year_count <span class="ot">&lt;-</span> artist_missing_year_count <span class="sc">|&gt;</span> <span class="co"># Calculate the percentage of missing &#39;year&#39; values for each artist #</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentage =</span> (missing_year <span class="sc">/</span> works_with_missing_year) <span class="sc">*</span> <span class="dv">100</span>)</span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>artist_missing_year_count <span class="ot">&lt;-</span> artist_missing_year_count <span class="sc">|&gt;</span></span>
-<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cumulative_percentage =</span> <span class="fu">cumsum</span>(percentage)) <span class="co"># Calculate the cumulative percentage of missing &#39;year&#39; values</span></span>
-<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>artists_to_resolve_50_percent <span class="ot">&lt;-</span> <span class="fu">min</span>(<span class="fu">which</span>(artist_missing_year_count<span class="sc">$</span>cumulative_percentage <span class="sc">&gt;=</span> <span class="dv">50</span>))</span>
-<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(artists_to_resolve_50_percent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of artist entries to be resolved in order to resolve atleast 50% of the missing data problem </span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>artist_missing_year_count <span class="ot">&lt;-</span> artist_missing_year_count <span class="sc">|&gt;</span> <span class="co"># Calculate the percentage of missing &#39;year&#39; values for each artist #</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentage =</span> (missing_year <span class="sc">/</span> works_with_missing_year) <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>artist_missing_year_count <span class="ot">&lt;-</span> artist_missing_year_count <span class="sc">|&gt;</span></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cumulative_percentage =</span> <span class="fu">cumsum</span>(percentage)) <span class="co"># Calculate the cumulative percentage of missing &#39;year&#39; values</span></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>artists_to_resolve_50_percent <span class="ot">&lt;-</span> <span class="fu">min</span>(<span class="fu">which</span>(artist_missing_year_count<span class="sc">$</span>cumulative_percentage <span class="sc">&gt;=</span> <span class="dv">50</span>))</span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(artists_to_resolve_50_percent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 11</code></pre>
 </div>
@@ -2914,14 +2918,17 @@ $ url                &lt;chr&gt; &quot;http://www.tate.org.uk/art/artworks/charl
 <p>The artist with the most works in the Tate collection is <u>Turner, Joseph Mallord William</u>.</p>
 <p>The artist with the tenth-most works in the Tate collection is <u>Warhol, Andy</u>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>artist_with_most_work <span class="ot">&lt;-</span> the_tate <span class="sc">|&gt;</span> <span class="fu">group_by</span>(artist) <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="at">total_works =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(total_works)) <span class="sc">|&gt;</span> <span class="fu">slice</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">pull</span>(artist)</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>artist_with_most_work</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finding artist with the most work</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>artist_with_most_work <span class="ot">&lt;-</span> the_tate <span class="sc">|&gt;</span> <span class="fu">group_by</span>(artist) <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="at">total_works =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(total_works)) <span class="sc">|&gt;</span> <span class="fu">slice</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">pull</span>(artist)</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>artist_with_most_work</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;Turner, Joseph Mallord William&quot;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Turner, Joseph Mallord William is the artist with the most works</span></span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>artist_with_tenth_rank_works <span class="ot">&lt;-</span> the_tate <span class="sc">|&gt;</span> <span class="fu">group_by</span>(artist) <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="at">total_works =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(total_works)) <span class="sc">|&gt;</span> <span class="fu">slice</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span> <span class="fu">pull</span>(artist)</span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>artist_with_tenth_rank_works</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Top ten artists with most works</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>artist_with_tenth_rank_works <span class="ot">&lt;-</span> the_tate <span class="sc">|&gt;</span> <span class="fu">group_by</span>(artist) <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="at">total_works =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(total_works)) <span class="sc">|&gt;</span> <span class="fu">slice</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span> <span class="fu">pull</span>(artist)</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>artist_with_tenth_rank_works</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;Warhol, Andy&quot;</code></pre>
 </div>
@@ -2932,7 +2939,8 @@ $ url                &lt;chr&gt; &quot;http://www.tate.org.uk/art/artworks/charl
 <h3 class="anchored" data-anchor-id="exercise-4">Exercise 4</h3>
 <p>The artist with the greatest number of works in the Tate collection represent <u>56.9197</u>% of the total number of works</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>the_tate <span class="sc">|&gt;</span>dplyr<span class="sc">::</span><span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Getting a glimpse of the data set</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>the_tate <span class="sc">|&gt;</span>dplyr<span class="sc">::</span><span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 69,201
 Columns: 20
@@ -2970,8 +2978,9 @@ $ url                &lt;chr&gt; &quot;http://www.tate.org.uk/art/artworks/charl
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 69201</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>perc_represented <span class="ot">&lt;-</span> ((artist_with_most_works<span class="sc">$</span>total_works)<span class="sc">/</span>total_no_of_works)<span class="sc">*</span><span class="dv">100</span></span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>perc_represented</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finding the required percentage</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>perc_represented <span class="ot">&lt;-</span> ((artist_with_most_works<span class="sc">$</span>total_works)<span class="sc">/</span>total_no_of_works)<span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>perc_represented</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 56.9197</code></pre>
 </div>
@@ -2985,26 +2994,26 @@ $ url                &lt;chr&gt; &quot;http://www.tate.org.uk/art/artworks/charl
 <span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>total_rows <span class="ot">&lt;-</span> total_no_of_works</span>
 <span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Select only the columns for artist and title to count distinct combinations #</span></span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Select only the columns for artist and title to count distinct combinations </span></span>
 <span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>distinct_artist_title_pair <span class="ot">&lt;-</span> the_tate <span class="sc">|&gt;</span> <span class="fu">select</span>(artist,title) <span class="sc">|&gt;</span> <span class="fu">distinct</span>()</span>
 <span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a>distinct_count <span class="ot">&lt;-</span> <span class="fu">nrow</span>(distinct_artist_title_pair)</span>
 <span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(total_rows) <span class="co"># Print the total number of rows in the dataset </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(total_rows) <span class="co"># Print the total number of unique artists </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 69201</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(distinct_count)  <span class="co"># Print distinct pairs only #</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(distinct_count)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 45496</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Count and print the number of duplicated artist-title pairs</span></span>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finding the number of duplicated artist-title pairs</span></span>
 <span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>duplicated_count <span class="ot">&lt;-</span> total_rows <span class="sc">-</span> distinct_count</span>
 <span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(duplicated_count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 23705</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co">#23705 duplicate artist-title pairs are present in the da</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co">#23705 duplicate artist-title pairs are present in the dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="exercise-6" class="level3">

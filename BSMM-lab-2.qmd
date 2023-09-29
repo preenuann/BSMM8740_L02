@@ -1,7 +1,7 @@
 ---
 title: "BSMM-lab-2"
 subtitle: "BSMM 8740 Fall 2023"
-author: "Anna Preenu Pappachan Rosily"
+author: "Anna Preenu Pappachan Rosily - 110105133"
 date: "29 September 2023"
 format: html
 editor: visual
@@ -14,7 +14,7 @@ library(tidyverse)    # for data wrangling + visualization
 library(tidymodels)   # for modeling
 library(gt)           # for making display tables
 library(gtExtras)     # helper functions for beautiful tables
-library(DataExplorer) #
+library(DataExplorer) 
 library(readr)
 library(dplyr)
 library(tibble)
@@ -65,11 +65,14 @@ the_tate |> DataExplorer::introduce()
 #This shows that there are no missing columns and that there are 219798 missing values
 the_tate |> DataExplorer::plot_missing()
 the_tate |> dplyr::glimpse()
+
+# Finding works with missing year data
 missing_recs <- the_tate |> filter(is.na(year))
 missing_recs_len <- nrow(missing_recs)
 missing_recs_len
 #5397 rows have missing data
 
+# Finding number of artists with missing date
 the_tate|>dplyr::filter(is.na(year))|>dplyr::distinct(artist)
 artists_with_missing_date <- the_tate |>
   filter(is.na(year)) |>
@@ -77,10 +80,11 @@ artists_with_missing_date <- the_tate |>
   nrow()
 artists_with_missing_date
 
+# Another way to find the number of works with missing year
 artist_missing_year_count <- the_tate|>dplyr::filter(is.na(year)) |> 
   group_by(artist) |>
   summarise(missing_year = sum(is.na(year))) |> 
-  arrange(desc(missing_year)) |> #Arrange the results in descending order of missing 'year' counts#
+  arrange(desc(missing_year)) |> 
   as_tibble()
 print(artist_missing_year_count)
 
@@ -90,6 +94,7 @@ print(artists_with_missing_year)
 works_with_missing_year <- sum(is.na(the_tate$year))
 print(works_with_missing_year)
 
+# Number of artist entries to be resolved in order to resolve atleast 50% of the missing data problem 
 artist_missing_year_count <- artist_missing_year_count |> # Calculate the percentage of missing 'year' values for each artist #
   mutate(percentage = (missing_year / works_with_missing_year) * 100)
 
@@ -108,9 +113,13 @@ The artist with the most works in the Tate collection is [Turner, Joseph Mallord
 The artist with the tenth-most works in the Tate collection is [Warhol, Andy]{.underline}.
 
 ```{r}
+
+# Finding artist with the most work
 artist_with_most_work <- the_tate |> group_by(artist) |> summarize(total_works = n()) |> arrange(desc(total_works)) |> slice(1) |> pull(artist)
 artist_with_most_work
 # Turner, Joseph Mallord William is the artist with the most works
+
+# Top ten artists with most works
 artist_with_tenth_rank_works <- the_tate |> group_by(artist) |> summarize(total_works = n()) |> arrange(desc(total_works)) |> slice(10) |> pull(artist)
 artist_with_tenth_rank_works
 # Warhol, Andy is the artist ranked 10nth with the most works
@@ -121,11 +130,14 @@ artist_with_tenth_rank_works
 The artist with the greatest number of works in the Tate collection represent [56.9197]{.underline}% of the total number of works
 
 ```{r}
+# Getting a glimpse of the data set
 the_tate |>dplyr::glimpse()
 artist_with_most_works <- the_tate |> group_by(artist) |> summarize(total_works = n()) |> arrange(desc(total_works)) |> slice(1)
 artist_with_most_works
 total_no_of_works <- nrow(the_tate)
 total_no_of_works
+
+# Finding the required percentage
 perc_represented <- ((artist_with_most_works$total_works)/total_no_of_works)*100
 perc_represented
 ```
@@ -139,20 +151,20 @@ library(dplyr)
 
 total_rows <- total_no_of_works
 
-# Select only the columns for artist and title to count distinct combinations #
+# Select only the columns for artist and title to count distinct combinations 
 distinct_artist_title_pair <- the_tate |> select(artist,title) |> distinct()
 
 distinct_count <- nrow(distinct_artist_title_pair)
 
-print(total_rows) # Print the total number of rows in the dataset 
+print(total_rows) # Print the total number of unique artists 
 
-print(distinct_count)  # Print distinct pairs only #
+print(distinct_count)  
 
-# Count and print the number of duplicated artist-title pairs
+# Finding the number of duplicated artist-title pairs
 duplicated_count <- total_rows - distinct_count
 print(duplicated_count)
 
-#23705 duplicate artist-title pairs are present in the da
+#23705 duplicate artist-title pairs are present in the dataset
 ```
 
 ### Exercise 6
@@ -169,13 +181,16 @@ the_tate_work_area <- the_tate |> mutate(area_cm2 = width * depth * height)
 the_tate_work_area
 selected_work <- the_tate_work_area |> select(artist,title,area_cm2) |> drop_na()
 selected_work
+
 # Finding the artist with largest work
 sorted_work <- selected_work |> arrange(area_cm2)
 largest_areawork <- sorted_work |> slice_head(n = 1)
 largest_areawork$artist
+
 # Finding the artist with smallest work
 smallest_areawork <- sorted_work |> slice_tail(n=1)
 smallest_areawork$artist
+
 # Area of the smallest work
 smallest_areawork$area_cm2
 ```
